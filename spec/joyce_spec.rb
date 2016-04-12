@@ -12,7 +12,7 @@ describe Joyce::Application do
     it 'should launch a new app instance' do
       expect(Application).to receive(:new).and_return(application)
       expect(application).to receive(:launch)
-      Application.kickstart!
+      Application.kickstart!(headless: true)
     end
   end
 
@@ -37,16 +37,50 @@ describe Joyce::Server do
 end
 
 describe Example::SampleApp do
+  subject(:app) { Example::SampleApp.new(headless: true) }
+
   it 'should have a view with the indicated class' do
-    expect(subject.view.class).to eq(Example::SampleAppView)
+    expect(app.view.class).to eq(Example::SampleAppView)
+  end
+
+  context "#launch" do
+    it 'should call setup' do
+      expect(app).to receive(:setup)
+      app.launch
+    end
   end
 end
 
 describe Example::SampleAppView do
-  let(:sample_app) { Example::SampleApp.new }
+  let(:sample_app) { Example::SampleApp.new(headless: true) }
+  let(:window) { instance_double(ApplicationWindow) }
+
   subject(:sample_app_view) { sample_app.view }
+  before { sample_app.setup }
+
   it 'should render to the app window' do
-    expect(sample_app.window).to receive(:draw_quad)
+    expect(sample_app).to receive(:window).and_return(window)
+    expect(window).to receive(:draw_quad)
     sample_app_view.render
+  end
+end
+
+describe Example::SampleServer, redis: true, flaky: true do
+  subject(:server) { Example::SampleServer.new }
+  let(:app) { Example::SampleApp.new(headless: true) }
+  let(:command) { Example::PingCommand.create(player_id: 'the_player_id') }
+  let(:event) { Example::PlayerPingedEvent.create(player_id: 'the_player_id', pinged_at: 'ping_time') }
+
+  before do
+    app.launch
+    server.boot
+  end
+
+  it 'should receive commands from app' do
+    expect { app.fire(command); sleep 3 }.to change{server.received_commands.count}.by(1)
+  end
+
+  it 'should propagate events to app' do
+    expect { server.sim.receive(event); sleep 3 }.to change{app.received_events.count}.by(1)
   end
 end

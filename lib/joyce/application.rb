@@ -4,13 +4,31 @@ module Joyce
       @headless = headless
     end
 
+    def setup
+      # ...
+    end
+
+    def tick
+      # ...
+    end
+
     def launch
+      sim.conduct!
+      setup
       window.show
       self
     end
 
-    def tick
-      p [ :app_tick ]
+    def fire(cmd)
+      sim.fire(cmd)
+    end
+
+    def received_events
+      sim.received_events
+    end
+
+    def sim
+      @simulation ||= RemoteSim.current
     end
 
     def view
