@@ -69,7 +69,7 @@ describe Example::SampleServer, redis: true, flaky: true do
   subject(:server) { Example::SampleServer.new }
   let(:app) { Example::SampleApp.new(headless: true) }
   let(:command) { Example::PingCommand.create(player_id: 'the_player_id', player_name: 'Alice') }
-  let(:event) { Example::PlayerAdmittedEvent.create(player_id: 'the_player_id', player_name: 'Alice', game_id: 'the_game_id') }
+  let(:event) { Example::PlayerAdmittedEvent.create( player_names: ['Alice'], game_id: 'the_game_id') }
 
   before do
     app.launch

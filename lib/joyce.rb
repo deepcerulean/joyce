@@ -24,6 +24,10 @@ module Joyce
     def window
       @application.window
     end
+
+    def font
+      @font ||= Gosu::Font.new(18)
+    end
   end
 
   class ApplicationWindow < Gosu::Window
