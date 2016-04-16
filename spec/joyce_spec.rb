@@ -36,8 +36,8 @@ describe Joyce::Server do
   end
 end
 
-describe Example::SampleApp do
-  subject(:app) { Example::SampleApp.new(headless: true) }
+describe Example::Application do
+  subject(:app) { Example::Application.new(headless: true) }
 
   it 'should have a view with the indicated class' do
     expect(app.view.class).to eq(Example::SampleAppView)
@@ -52,7 +52,7 @@ describe Example::SampleApp do
 end
 
 describe Example::SampleAppView do
-  let(:sample_app) { Example::SampleApp.new(headless: true) }
+  let(:sample_app) { Example::Application.new(headless: true) }
   let(:window) { instance_double(ApplicationWindow) }
 
   subject(:sample_app_view) { sample_app.view }
@@ -67,9 +67,14 @@ end
 
 describe Example::SampleServer, redis: true, flaky: true do
   subject(:server) { Example::SampleServer.new }
-  let(:app) { Example::SampleApp.new(headless: true) }
+  let(:app) { Example::Application.new(headless: true) }
   let(:command) { Example::PingCommand.create(player_id: 'the_player_id', player_name: 'Alice') }
-  let(:event) { Example::PlayerAdmittedEvent.create( player_names: ['Alice'], game_id: 'the_game_id') }
+  let(:event) { Example::PlayerAdmittedEvent.create( player_name: "Alice", player_id: 'the_player_id', connected_player_list: connected_player_list) }
+  let(:connected_player_list) do
+    [
+      { id: 'the_player_id', name: 'Alice', joined_at: 1.day.ago }
+    ]
+  end
 
   before do
     app.launch

@@ -3,6 +3,9 @@ require 'redis' # TODO move require to mc/remote_sim?
 require 'metacosm'
 require 'metacosm/remote_simulation'
 
+require 'action_view' # just for distance of time in words..
+include ActionView::Helpers::DateHelper
+
 require 'joyce/version'
 require 'joyce/application'
 
