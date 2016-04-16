@@ -28,7 +28,7 @@ module Example
     viewed_with Example::SampleAppView
 
     def setup
-      p [ :sample_app_setup ]
+      # p [ :sample_app_setup ]
       GameView.create(active_player_id: player_id)
       sim.params[:active_player_id] = player_id
     end
@@ -143,10 +143,10 @@ module Example
   #
   # class GameController
   #   def ping(player_id:, player_name:)
-  #     game = Game.find_by ... 
+  #     game = Game.find_by ...
   #   end
   # end
-  # 
+  #
 
   class ApplicationEventListener < Metacosm::EventListener
     def game_view
@@ -193,7 +193,7 @@ module Example
     end
   end
 
-
+  # TODO sagas in metacosm (also controllers for commands...)
   # class PlayerSaga < Metacosm::Saga
   #   def player_dropped(player_id:, connected_player_list:)
   #   end

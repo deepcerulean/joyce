@@ -1,10 +1,13 @@
 name: joyce
-summary: "TODO: Summary"
-description: "TODO: Description"
+summary: "multiplayer game server framework"
+description: "isomorphic ruby games"
 license: MIT
 authors: Joseph Weissman
 email: jweissman1986@gmail.com
 homepage: https://rubygems.org/gems/joyce
+
+dependencies:
+  gosu: ~> 0.10  
 
 development_dependencies:
   bundler: ~> 1.10

@@ -4,13 +4,11 @@ module Example
 
     def iterate!
       # check for dropped players
-      p [ :players_pinged_at, self.players.pluck(:pinged_at) ]
       players_to_drop = self.players.all.select do |player|
         player.pinged_at < 3.seconds.ago
       end
 
       players_to_drop.each do |player|
-        p [ :dropping_player, name: player.name ]
         drop_player(player)
       end
 
