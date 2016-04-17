@@ -8,6 +8,8 @@ homepage: https://rubygems.org/gems/joyce
 
 dependencies:
   gosu: ~> 0.10  
+  metacosm: ~> 0.3
+  actionpack: ~> 4.2
 
 development_dependencies:
   bundler: ~> 1.10
