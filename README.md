@@ -26,9 +26,8 @@ rendering views and when necessary figuring out what commands to publish (when t
 
 ## Examples
 
-    Below is the source for a toy app that displays a list of other connected players and how long they've been connected. The server uses a ping command from clients to determine if players have disconnected.
+Below is the source for a toy app that displays a list of other connected players and how long they've been connected. The server uses a ping command from clients to determine if players have disconnected.
 
-    ```ruby
     require 'joyce'
     module Example
       class SampleAppView < Joyce::ApplicationView
@@ -43,12 +42,10 @@ rendering views and when necessary figuring out what commands to publish (when t
 
       class SampleServer < Joyce::Server
         def setup
-          # p [ :sample_server_setup ]
           Game.create
         end
 
         def tick
-          # p [ :sample_server_tick ]
           Game.all.each(&:iterate!)
         end
       end
@@ -57,7 +54,6 @@ rendering views and when necessary figuring out what commands to publish (when t
         viewed_with Example::SampleAppView
 
         def setup
-          # p [ :sample_app_setup ]
           GameView.create(active_player_id: player_id)
           sim.params[:active_player_id] = player_id
         end
@@ -144,7 +140,7 @@ rendering views and when necessary figuring out what commands to publish (when t
 
         private
         def player_names
-          self.player_views.map { |p| "#{p.name} (#{time_ago_in_words(p.joined_at)})" } #(&:name)
+          self.player_views.map { |p| "#{p.name} (#{time_ago_in_words(p.joined_at)})" }
         end
       end
 
@@ -154,13 +150,8 @@ rendering views and when necessary figuring out what commands to publish (when t
 
       class PingCommandHandler
         def handle(player_id:, player_name:)
-          p [ :ping, from_player: player_id ]
           game = Game.find_by(players: { id: player_id })
           if game.nil?
-            # we could try to create a new game for the player?
-            # or add them to an existing one?
-            p [ :no_game_yet! ]
-
             game = Game.first || Game.create
             game.admit_player(player_id: player_id, player_name: player_name)
           end
@@ -168,14 +159,6 @@ rendering views and when necessary figuring out what commands to publish (when t
           game.ping(player_id: player_id)
         end
       end
-
-      #
-      # class GameController
-      #   def ping(player_id:, player_name:)
-      #     game = Game.find_by ...
-      #   end
-      # end
-      #
 
       class ApplicationEventListener < Metacosm::EventListener
         def game_view
@@ -193,10 +176,7 @@ rendering views and when necessary figuring out what commands to publish (when t
 
       class PlayerAdmittedEventListener < ApplicationEventListener
         def receive(player_id:, player_name:, connected_player_list:)
-          p [ :player_admitted_event_listener ]
           if game_view
-            # game_view.create_player_view(player_id: player_id, name: player_name, joined_at: Time.now)
-            # go through connected player list and make views...
             connected_player_list.each do |id:, name:, joined_at:|
               player_view = game_view.player_views.where(player_id: id).first_or_create
               player_view.update(name: name, joined_at: joined_at)
@@ -211,7 +191,6 @@ rendering views and when necessary figuring out what commands to publish (when t
 
       class PlayerDroppedEventListener < ApplicationEventListener
         def receive(player_id:, connected_player_list:)
-          p [ :player_dropped_event_listener! ]
           if game_view
             game_view.player_views.map(&:destroy)
             connected_player_list.each do |id:, name:, joined_at:|
@@ -222,7 +201,6 @@ rendering views and when necessary figuring out what commands to publish (when t
         end
       end
     end
-    ```
 
 ## Requirements
 
