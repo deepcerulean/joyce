@@ -14,6 +14,8 @@ module Joyce
   COMMAND_QUEUE = :joyce_command_queue
 
   class ApplicationView
+    include PassiveRecord
+
     attr_reader :application
 
     def initialize(application)
@@ -29,7 +31,11 @@ module Joyce
     end
 
     def font
-      @font ||= Gosu::Font.new(18)
+      @font ||= Gosu::Font.new(24)
+    end
+
+    def mouse_position
+      window.mouse_position
     end
   end
 
@@ -51,6 +57,10 @@ module Joyce
 
     def update
       app.tick
+    end
+
+    def mouse_position
+      [ mouse_x, mouse_y ]
     end
   end
 
