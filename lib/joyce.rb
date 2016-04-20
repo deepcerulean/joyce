@@ -31,7 +31,7 @@ module Joyce
     end
 
     def font
-      @font ||= Gosu::Font.new(24)
+      @font ||= Gosu::Font.new(20)
     end
 
     def mouse_position
@@ -57,6 +57,12 @@ module Joyce
 
     def update
       app.tick
+    end
+
+    def button_down(id)
+      if id == Gosu::MsLeft then
+        app.click
+      end
     end
 
     def mouse_position

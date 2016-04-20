@@ -1,5 +1,8 @@
 module Joyce
   class Application
+    DEFAULT_WIDTH = 800
+    DEFAULT_HEIGHT = 600
+
     def initialize(headless: false)
       @headless = headless
     end
@@ -9,6 +12,10 @@ module Joyce
     end
 
     def tick
+      # ...
+    end
+
+    def click
       # ...
     end
 
@@ -36,7 +43,15 @@ module Joyce
     end
 
     def window
-      @window ||= @headless ? NullWindow.new(self) : ApplicationWindow.new(self)
+      @window ||= @headless ? NullWindow.new(self) : ApplicationWindow.new(self, width: width, height: height)
+    end
+
+    def width
+      DEFAULT_WIDTH
+    end
+
+    def height
+      DEFAULT_HEIGHT
     end
 
     private
