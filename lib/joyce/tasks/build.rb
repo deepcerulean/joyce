@@ -10,6 +10,9 @@ module Joyce
         cp_r "../dist/Ruby.app", target_app_bundle_root
         puts "--- Ruby.app copied!"
 
+        puts "--- copying your source code..."
+        cp_r "lib", "#{target_app_bundle_root}/Contents/Resources/lib"
+
         puts "--- Analyzing your gems..."
         p Bundler.definition.specs_for([:default])
 
@@ -20,7 +23,9 @@ module Joyce
         # info "Copying source gems from system"
         binary_gems_to_ignore = %w[ gosu minitest ]
         gem_list = vendored_gem_names(ignoring: binary_gems_to_ignore)
+
         copy_gems(gem_list, destination: File.join(gem_destination))
+
         write_main_rb(root: target_app_bundle_root) #(app_class: "#{app_name}::Application")
       end
 
@@ -44,6 +49,7 @@ module Joyce
 
             puts "--- gems shifted"
 
+            require 'forwardable'
             require 'joyce'
             require 'application'
             
