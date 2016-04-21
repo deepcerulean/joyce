@@ -7,4 +7,4 @@ require 'joyce'
 
 include Joyce
 
-require_relative '../example/application'
+require_relative '../example/lib/application'
