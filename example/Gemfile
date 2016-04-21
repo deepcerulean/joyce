@@ -1,0 +1,8 @@
+source 'https://rubygems.org'
+
+# example app gemfile
+gem 'joyce', '0.1.4'
+gem 'bundler'
+gem 'pry'
+
+gem 'rake'

@@ -10,7 +10,6 @@ end
 
 require 'rake'
 
-
 require 'rubygems/tasks'
 Gem::Tasks.new
 
@@ -21,7 +20,7 @@ task :test    => :spec
 task :default => :spec
 
 require 'yard'
-YARD::Rake::YardocTask.new  
+YARD::Rake::YardocTask.new
 task :doc => :yard
 
 require 'cucumber/rake/task'
@@ -29,3 +28,5 @@ require 'cucumber/rake/task'
 Cucumber::Rake::Task.new do |t|
   t.cucumber_opts = %w[--format pretty]
 end
+
+

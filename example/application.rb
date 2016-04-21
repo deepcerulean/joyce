@@ -8,18 +8,16 @@ module Example
     end
 
     def game_view
-      GameView.find_by active_player_id: application.player_id
+      GameView.find_by(active_player_id: application.player_id)
     end
   end
 
   class SampleServer < Joyce::Server
     def setup
-      # p [ :sample_server_setup ]
       Game.create
     end
 
     def tick
-      # p [ :sample_server_tick ]
       Game.all.each(&:iterate!)
     end
   end
@@ -28,7 +26,6 @@ module Example
     viewed_with Example::SampleAppView
 
     def setup
-      # p [ :sample_app_setup ]
       GameView.create(active_player_id: player_id)
       sim.params[:active_player_id] = player_id
     end
@@ -36,7 +33,6 @@ module Example
     def tick
       @ticks ||= 0
       @ticks += 1
-      # p [ :sample_app_tick ]
       if (@ticks % 30 == 0)
         fire(PingCommand.create(player_id: player_id, player_name: player_name))
       end

@@ -1,0 +1,11 @@
+require 'rubygems'
+require 'bundler/setup'
+require 'fileutils'
+require 'joyce'
+require 'joyce/tasks/build'
+
+task :app do
+  Joyce::Tasks::AppBuilder.new.make({
+    app_name: "Joyce Example App"
+  })
+end
