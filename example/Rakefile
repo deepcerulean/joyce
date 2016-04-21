@@ -6,6 +6,9 @@ require 'joyce/tasks/build'
 
 task :app do
   Joyce::Tasks::AppBuilder.new.make({
-    app_name: "Joyce Example App"
+    app_name: "joyce-example",
+    app_class_name: 'Example::Application',
+    template_location: "../dist/Ruby.app",
+    target_directory: "../dist"
   })
 end
