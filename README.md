@@ -1,11 +1,12 @@
 # joyce
 
+[![Joyce portrait](https://upload.wikimedia.org/wikipedia/commons/1/1e/Revolutionary_Joyce_Better_Contrast.jpg)](https://upload.wikimedia.org/wikipedia/commons/1/1e/Revolutionary_Joyce_Better_Contrast.jpg)
 
 * [Homepage](https://rubygems.org/gems/joyce)
 * [Documentation](http://rubydoc.info/gems/joyce/frames)
 * [Email](mailto:jweissman1986 at gmail.com)
 
-[![Code Climate GPA](https://codeclimate.com/github//joyce/badges/gpa.svg)](https://codeclimate.com/github//joyce)
+[![Code Climate GPA](https://codeclimate.com/github/deepcerulean/joyce/badges/gpa.svg)](https://codeclimate.com/github/deepcerulean/joyce)
 
 ## Description
 
