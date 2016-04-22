@@ -38,18 +38,18 @@ module Joyce
           end
 
           file.puts <<-ruby
-            require 'fileutils'
-            FileUtils.mkdir_p("#{Dir.home}/#{app_name}/")
-            $stdout.reopen("#{Dir.home}/#{app_name}/app.log", "w")
-            $stderr.reopen("#{Dir.home}/#{app_name}/err.log", "w")
-            GEM_REQUIRE_PATHS = #{require_paths.flatten.inspect}
-            GEM_REQUIRE_PATHS.each do |path|
-              $LOAD_PATH.unshift File.expand_path(File.join("../vendor/gems", path), __FILE__)
-            end
-            require 'joyce'
-            require 'application'
-            #{app_class_name}.kickstart!
-            ruby
+require 'fileutils'
+FileUtils.mkdir_p("#{Dir.home}/#{app_name}/")
+$stdout.reopen("#{Dir.home}/#{app_name}/app.log", "w")
+$stderr.reopen("#{Dir.home}/#{app_name}/err.log", "w")
+GEM_REQUIRE_PATHS = #{require_paths.flatten.inspect}
+GEM_REQUIRE_PATHS.each do |path|
+  $LOAD_PATH.unshift File.expand_path(File.join("../vendor/gems", path), __FILE__)
+end
+require 'joyce'
+require '#{app_name}'
+#{app_class_name}.kickstart!
+ruby
         end
       end
 
