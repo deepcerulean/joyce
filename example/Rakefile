@@ -1,6 +1,5 @@
 require 'rubygems'
 require 'bundler/setup'
-require 'fileutils'
 require 'joyce'
 require 'joyce/tasks/build'
 

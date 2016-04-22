@@ -1,3 +1,5 @@
+require 'fileutils'
+
 module Joyce
   module Tasks
     class AppBuilder
@@ -15,8 +17,9 @@ module Joyce
         puts "--- let's copy gems in..."
         gem_destination = "#{target_app_bundle_root}/Contents/Resources/vendor"
 
-        binary_gems_to_ignore = %w[ gosu minitest ]
-        gem_list = vendored_gem_names(ignoring: binary_gems_to_ignore)
+        gems_to_ignore = %w[ gosu minitest ]
+        gems_to_ignore << app_name # since we just copied over source?
+        gem_list = vendored_gem_names(ignoring: gems_to_ignore)
 
         copy_gems(gem_list, destination: File.join(gem_destination))
         puts "--- gems copied"
