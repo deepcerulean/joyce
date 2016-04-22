@@ -21,6 +21,8 @@ module Joyce
         copy_gems(gem_list, destination: File.join(gem_destination))
         puts "--- gems copied"
 
+        # TODO copy assets...?
+
         puts "--- writing main.rb..."
         write_main_rb(app_class_name: app_class_name, root: target_app_bundle_root, app_name: app_name)
         puts "--- main.rb written!"
@@ -33,13 +35,11 @@ module Joyce
           end
 
           file.puts <<-ruby
-            require 'fileutils'
-            FileUtils.mkdir_p "#{Dir.home}/#{app_name}/"
-            $stdout.reopen("#{Dir.home}/#{app_name}/app.log", "w")
-            $stderr.reopen("#{Dir.home}/#{app_name}/err.log", "w")
+            $stdout.reopen("#{Dir.home}/#{app_name}.log", "w")
+            $stderr.reopen("#{Dir.home}/#{app_name}.error.log", "w")
             GEM_REQUIRE_PATHS = #{require_paths.flatten.inspect}
             GEM_REQUIRE_PATHS.each do |path|
-              $LOAD_PATH.unshift File.expand_path(File.join("../vendor/gems", path), __FILE__)
+              $LOAD_PATH.unshift File.expand_path(File.join('../vendor/gems', path), __FILE__)
             end
             require 'joyce'
             require 'application'
