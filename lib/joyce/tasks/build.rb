@@ -25,6 +25,9 @@ module Joyce
         puts "--- gems copied"
 
         # TODO copy assets...?
+        puts "--- copying your media..."
+        cp_r "media/.", "#{target_app_bundle_root}/Contents/Resources/media"
+        puts "--- media copied in!"
 
         puts "--- writing main.rb..."
         write_main_rb(app_class_name: app_class_name, root: target_app_bundle_root, app_name: app_name)
