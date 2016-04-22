@@ -33,6 +33,8 @@ module Joyce
           end
 
           file.puts <<-ruby
+            require 'fileutils'
+            FileUtils.mkdir_p "#{Dir.home}/#{app_name}/"
             $stdout.reopen("#{Dir.home}/#{app_name}/app.log", "w")
             $stderr.reopen("#{Dir.home}/#{app_name}/err.log", "w")
             GEM_REQUIRE_PATHS = #{require_paths.flatten.inspect}

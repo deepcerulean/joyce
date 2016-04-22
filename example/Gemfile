@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # example app gemfile
-gem 'joyce', '0.1.6'
+gem 'joyce', '0.1.7'
 gem 'bundler'
 gem 'pry'
 
