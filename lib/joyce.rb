@@ -43,7 +43,7 @@ module Joyce
     attr_accessor :width, :height
     attr_reader :app
 
-    def initialize(app, width:, height:, fullscreen: false)
+    def initialize(app, width:, height:, fullscreen: true)
       @app = app
       self.width  = width
       self.height = height
