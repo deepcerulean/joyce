@@ -14,8 +14,6 @@ module Joyce
   COMMAND_QUEUE = :joyce_command_queue
 
   class ApplicationView
-    include PassiveRecord
-
     attr_reader :application
 
     def initialize(application)
