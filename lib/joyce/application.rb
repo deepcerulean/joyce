@@ -1,7 +1,7 @@
 module Joyce
   class Application
-    DEFAULT_WIDTH = 800
-    DEFAULT_HEIGHT = 600
+    DEFAULT_WIDTH = 1920
+    DEFAULT_HEIGHT = 1080
 
     def initialize(headless: false)
       @headless = headless

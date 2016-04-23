@@ -43,12 +43,12 @@ module Joyce
     attr_accessor :width, :height
     attr_reader :app
 
-    def initialize(app, width: 800, height: 600)
+    def initialize(app, width:, height:, fullscreen: false)
       @app = app
       self.width  = width
       self.height = height
 
-      super(self.width, self.height)
+      super(self.width, self.height, fullscreen)
     end
 
     def draw
