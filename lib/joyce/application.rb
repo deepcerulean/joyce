@@ -7,7 +7,7 @@ module Joyce
       @headless = headless
     end
 
-    def setup
+    def setup(*)
       # ...
     end
 
@@ -19,9 +19,9 @@ module Joyce
       # ...
     end
 
-    def launch
+    def launch(*setup_args)
       sim.conduct!
-      setup
+      setup(*setup_args)
       window.show
       self
     end
@@ -66,9 +66,9 @@ module Joyce
         self
       end
 
-      def kickstart!(headless: false)
+      def kickstart!(headless: false, setup: {})
         app = new(headless: headless)
-        app.launch
+        app.launch(setup)
         app
       end
     end

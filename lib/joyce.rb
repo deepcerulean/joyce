@@ -8,34 +8,12 @@ include ActionView::Helpers::DateHelper
 
 require 'joyce/version'
 require 'joyce/application'
+require 'joyce/application_view'
 
 module Joyce
+  # TODO move to joyce config?
   EVENT_STREAM  = :joyce_event_stream
   COMMAND_QUEUE = :joyce_command_queue
-
-  class ApplicationView
-    attr_reader :application
-
-    def initialize(application)
-      @application ||= application
-    end
-
-    def render
-      # ...
-    end
-
-    def window
-      @application.window
-    end
-
-    def font
-      @font ||= Gosu::Font.new(20)
-    end
-
-    def mouse_position
-      window.mouse_position
-    end
-  end
 
   class ApplicationWindow < Gosu::Window
     attr_accessor :width, :height
