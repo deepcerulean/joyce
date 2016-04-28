@@ -35,7 +35,19 @@ module Joyce
     end
 
     def sim
-      @simulation ||= RemoteSim.current
+      @simulation ||= self.class.simulation_class.current # RemoteSim.current
+    end
+
+    def self.simulation_class
+      if connect_immediately?
+        RemoteSim
+      else
+        Metacosm::Simulation
+      end
+    end
+
+    def self.connect_immediately?
+      false
     end
 
     def view
