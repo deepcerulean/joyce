@@ -3,6 +3,6 @@ require 'rubygems'
 # require 'bundler/setup'
 
 require 'joyce'
-require 'application'
+require_relative 'lib/application'
 
 Example::Application.kickstart!

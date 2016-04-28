@@ -25,7 +25,7 @@ module Example
   class Application < Joyce::Application
     viewed_with Example::SampleAppView
 
-    def setup
+    def setup(*)
       GameView.create(active_player_id: player_id)
       sim.params[:active_player_id] = player_id
     end
