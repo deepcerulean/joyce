@@ -3,7 +3,8 @@ require 'redis' # TODO move require to mc/remote_sim?
 require 'metacosm'
 require 'metacosm/remote_simulation'
 
-require 'action_view' # just for distance of time in words..
+# TODO i think this can be moved to example/example's Gemfile
+require 'action_view' # just for distance of time in words.. 
 include ActionView::Helpers::DateHelper
 
 require 'joyce/version'
@@ -11,7 +12,6 @@ require 'joyce/application'
 require 'joyce/application_view'
 
 module Joyce
-  # TODO move to joyce config?
   EVENT_STREAM  = :joyce_event_stream
   COMMAND_QUEUE = :joyce_command_queue
 
@@ -36,8 +36,10 @@ module Joyce
     end
 
     def button_down(id)
-      if id == Gosu::MsLeft then
+      if id == Gosu::MsLeft
         app.click
+      elsif id == Gosu::KbEscape 
+        close
       end
     end
 
