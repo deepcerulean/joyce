@@ -4,7 +4,7 @@ require 'metacosm'
 require 'metacosm/remote_simulation'
 
 # TODO i think this can be moved to example/example's Gemfile
-require 'action_view' # just for distance of time in words.. 
+require 'action_view' # just for distance of time in words..
 include ActionView::Helpers::DateHelper
 
 require 'joyce/version'
@@ -38,8 +38,10 @@ module Joyce
     def button_down(id)
       if id == Gosu::MsLeft
         app.click
-      elsif id == Gosu::KbEscape 
+      elsif id == Gosu::KbEscape
         close
+      else
+        app.press(id)
       end
     end
 

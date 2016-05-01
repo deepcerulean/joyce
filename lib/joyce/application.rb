@@ -19,6 +19,10 @@ module Joyce
       # ...
     end
 
+    def press(*)
+      # ...
+    end
+
     def launch(*setup_args)
       sim.conduct!
       setup(*setup_args)
