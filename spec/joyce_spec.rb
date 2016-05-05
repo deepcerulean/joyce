@@ -53,7 +53,7 @@ end
 
 describe Example::SampleAppView do
   let(:sample_app) { Example::Application.new(headless: true) }
-  let(:window) { instance_double(ApplicationWindow) }
+  let(:window) { double }
 
   subject(:sample_app_view) { sample_app.view }
   before { sample_app.setup }

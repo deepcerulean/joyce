@@ -15,7 +15,11 @@ module Joyce
     end
 
     def font
-      @font ||= Gosu::Font.new(20)
+      @font ||= if defined?(Gosu)
+                  Gosu::Font.new(20)
+                else
+                  nil # NullFont?
+                end
     end
 
     def mouse_position

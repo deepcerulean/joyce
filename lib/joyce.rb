@@ -1,4 +1,4 @@
-require 'gosu'
+# require 'gosu'
 require 'redis' # TODO move require to mc/remote_sim?
 require 'metacosm'
 require 'metacosm/remote_simulation'
@@ -15,38 +15,40 @@ module Joyce
   EVENT_STREAM  = :joyce_event_stream
   COMMAND_QUEUE = :joyce_command_queue
 
-  class ApplicationWindow < Gosu::Window
-    attr_accessor :width, :height
-    attr_reader :app
+  if defined?(Gosu)
+    class ApplicationWindow < Gosu::Window
+      attr_accessor :width, :height
+      attr_reader :app
 
-    def initialize(app, width:, height:, fullscreen: true)
-      @app = app
-      self.width  = width
-      self.height = height
+      def initialize(app, width:, height:, fullscreen: true)
+        @app = app
+        self.width  = width
+        self.height = height
 
-      super(self.width, self.height, fullscreen)
-    end
-
-    def draw
-      app.view.render
-    end
-
-    def update
-      app.tick
-    end
-
-    def button_down(id)
-      if id == Gosu::MsLeft
-        app.click
-      elsif id == Gosu::KbEscape
-        close
-      else
-        app.press(id)
+        super(self.width, self.height, fullscreen)
       end
-    end
 
-    def mouse_position
-      [ mouse_x, mouse_y ]
+      def draw
+        app.view.render
+      end
+
+      def update
+        app.tick
+      end
+
+      def button_down(id)
+        if id == Gosu::MsLeft
+          app.click
+        elsif id == Gosu::KbEscape
+          close
+        else
+          app.press(id)
+        end
+      end
+
+      def mouse_position
+        [ mouse_x, mouse_y ]
+      end
     end
   end
 

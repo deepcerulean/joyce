@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gemspec
 
-gem 'gosu'
+# gem 'gosu'
 gem 'metacosm'
 
 group :development do

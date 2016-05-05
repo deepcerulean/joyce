@@ -7,7 +7,7 @@ email: jweissman1986@gmail.com
 homepage: https://rubygems.org/gems/joyce
 
 dependencies:
-  gosu: ~> 0.10  
+  # gosu: ~> 0.10  
   metacosm: ~> 0.3
   actionpack: ~> 4.2
 
