@@ -1,6 +1,7 @@
 # require 'gosu'
 require 'redis' # TODO move require to mc/remote_sim?
 require 'metacosm'
+require 'metacosm/redis'
 require 'metacosm/remote_simulation'
 
 # TODO i think this can be moved to example/example's Gemfile
@@ -128,8 +129,8 @@ module Joyce
       super(COMMAND_QUEUE, EVENT_STREAM)
     end
 
-    def redis_connection
-      ::Redis.new
-    end
+    # def redis_connection
+    #   ::Redis.new
+    # end
   end
 end
